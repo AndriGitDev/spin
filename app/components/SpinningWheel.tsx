@@ -142,10 +142,12 @@ export default function SpinningWheel({ options, isSpinning, onSpinComplete }: S
       const normalizedRotation = finalRotationRef.current % 360;
       const sliceAngle = 360 / options.length;
 
-      // Adjust for pointer at top (12 o'clock position)
-      // The pointer points down, so we need to account for that
-      const adjustedRotation = (360 - normalizedRotation + 90) % 360;
-      const winningIndex = Math.floor(adjustedRotation / sliceAngle) % options.length;
+      // The arrow is at the top (270 degrees in canvas coordinates)
+      // After rotating, we need to find which original slice is at that position
+      // We subtract the rotation from the arrow position to find the original angle
+      const arrowPosition = 270; // Top of the wheel in canvas coordinates (where 0° is at 3 o'clock)
+      const originalAngle = (arrowPosition - normalizedRotation + 360) % 360;
+      const winningIndex = Math.floor(originalAngle / sliceAngle) % options.length;
 
       setTimeout(() => {
         onSpinComplete(options[winningIndex]);
