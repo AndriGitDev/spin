@@ -4,8 +4,8 @@ import { useState } from 'react';
 import SpinningWheel from './components/SpinningWheel';
 
 export default function Home() {
-  const [title, setTitle] = useState('Where do we eat?');
-  const [options, setOptions] = useState<string[]>(['KFC', 'Dominos', 'Subway']);
+  const [title, setTitle] = useState('');
+  const [options, setOptions] = useState<string[]>([]);
   const [newOption, setNewOption] = useState('');
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<string | null>(null);
@@ -19,9 +19,7 @@ export default function Home() {
   };
 
   const removeOption = (index: number) => {
-    if (options.length > 2) {
-      setOptions(options.filter((_, i) => i !== index));
-    }
+    setOptions(options.filter((_, i) => i !== index));
   };
 
   const handleSpin = () => {
@@ -69,7 +67,7 @@ export default function Home() {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 text-lg"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 text-lg text-gray-900"
                 placeholder="e.g., Where do we eat?"
               />
             </div>
@@ -90,8 +88,7 @@ export default function Home() {
                     </span>
                     <button
                       onClick={() => removeOption(index)}
-                      disabled={options.length <= 2}
-                      className="text-red-500 hover:text-red-700 font-bold px-3 py-1 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      className="text-red-500 hover:text-red-700 font-bold px-3 py-1 transition-colors"
                     >
                       ✕
                     </button>
@@ -105,7 +102,7 @@ export default function Home() {
                   value={newOption}
                   onChange={(e) => setNewOption(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addOption()}
-                  className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+                  className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 text-gray-900"
                   placeholder="Add new option..."
                   disabled={options.length >= 12}
                 />
