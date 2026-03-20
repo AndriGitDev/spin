@@ -19,10 +19,20 @@ export default function RootLayout({
         <Script src="https://swetrix.org/swetrix.js" strategy="afterInteractive" />
         <Script id="swetrix-init" strategy="afterInteractive">
           {`
-            swetrix.init('JxnEBvQfmUjb', {
-              apiURL: 'https://swetrixapi.kindra.is/log',
-            })
-            swetrix.trackViews()
+            document.addEventListener('DOMContentLoaded', function() {
+              if (window.swetrix) {
+                swetrix.init('JxnEBvQfmUjb', {
+                  apiURL: 'https://swetrixapi.kindra.is/log',
+                });
+                swetrix.trackViews();
+              }
+            });
+            if (document.readyState !== 'loading' && window.swetrix) {
+              swetrix.init('JxnEBvQfmUjb', {
+                apiURL: 'https://swetrixapi.kindra.is/log',
+              });
+              swetrix.trackViews();
+            }
           `}
         </Script>
         <noscript>
