@@ -3,8 +3,9 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SPIN - Start Picking Instead of Negotiating",
-  description: "Make decisions faster with our spinning wheel app. Stop the back-and-forth and let the wheel decide!",
+  title: "SPIN - A Shareable Decision Wheel",
+  description:
+    "Build a decision wheel, spin it with friends, and share the exact picker with a link.",
 };
 
 export default function RootLayout({
